@@ -1,0 +1,7 @@
+---
+- hosts: groundzero
+  remote_user: admin
+  tasks:
+    - name: 'Create and Configure VPC'
+      ping:
+      remote_user: admin

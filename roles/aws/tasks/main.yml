@@ -1,0 +1,4 @@
+---
+#Will begin the process of bringing up the minimum components in AWS. Once minimum components are completed, the management server will take over for the rest of the configuration
+- name: 'Create the VPC and configure DNS parameters'
+  spoolvpc.sh:

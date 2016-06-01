@@ -1,0 +1,6 @@
+---
+#This playbook governs the minumum setup required in AWS before control can be handed to the management server for further setup
+- hosts: groundzero
+  roles:
+    - common
+    - aws
