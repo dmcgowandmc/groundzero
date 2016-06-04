@@ -2,11 +2,11 @@
 
 #Create the VPC and configure the correct DNS settings. AWS Console must be installed
 
-#Return the VPC ID which is requiredfor future operations.
+#Return the VPC ID which is required for future operations.
 
 ## IMPROVEMENTS REQUIRED##
 
-#Hard coded IP Address range specifically for the coffeemate app. This would allow for variable inputs
+#Hard coded IP Address range specifically for the coffeemate app. Variable input and VPC Tags should be allowed
 
 VPCTAGS="[{\"Key\":\"Name\",\"Value\":\"coffeemate.network.vpc\"}]"
 

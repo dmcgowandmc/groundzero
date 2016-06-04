@@ -1,10 +1,7 @@
 {
-    "Vpc": {
-        "VpcId": "vpc-d1b9e7b4", 
-        "InstanceTenancy": "default", 
-        "State": "pending", 
-        "DhcpOptionsId": "dopt-1e65c97b", 
-        "CidrBlock": "10.0.0.0/16", 
-        "IsDefault": false
+    "InternetGateway": {
+        "Tags": [],
+        "InternetGatewayId": "igw-dd24b0b8",
+        "Attachments": []
     }
 }
