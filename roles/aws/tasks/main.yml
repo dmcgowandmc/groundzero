@@ -1,10 +1,7 @@
 ---
 #Will begin the process of bringing up the minimum components in AWS. Once minimum components are completed, the management server will take over for the rest of the configuration
-#- name: 'Create the VPC and configure DNS parameters'
-#  spoolvpc.sh:
+- name: 'Create the VPC and configure DNS parameters'
+  spoolvpc.sh:
 - name: 'Create and Attach the Internet Gateway'
-#  spoolig.sh:
-  spoolig.sh: VpcID=vpc-1e26037b supnup=imadeitup
-#  spoolig.sh:
-#    myvar: thisvarhaha
-#    secondvar: thissecondvar
+  spoolig.sh:
+    VpcID: "{{ VpcID }}"

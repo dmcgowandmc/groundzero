@@ -15,4 +15,4 @@ aws ec2 create-tags --resources $VPCID --tags $VPCTAGS
 aws ec2 modify-vpc-attribute --vpc-id $VPCID --enable-dns-support
 aws ec2 modify-vpc-attribute --vpc-id $VPCID --enable-dns-hostnames
 
-echo "{\"VpcID\":\"$VPCID\"}"
+echo "{\"changed\":\"True\",\"ansible_facts\":{\"VpcID\":\"$VPCID\"}}"
