@@ -4,7 +4,7 @@
 
 #Return the VPC ID which is required for future operations.
 
-## IMPROVEMENTS REQUIRED##
+##IMPROVEMENTS REQUIRED##
 
 #Hard coded IP Address range specifically for the coffeemate app. Variable input and VPC Tags should be allowed
 
