@@ -1,7 +1,29 @@
 ---
 #Will begin the process of bringing up the minimum components in AWS. Once minimum components are completed, the management server will take over for the rest of the configuration
-- name: 'Create the VPC and configure DNS parameters'
-  spoolvpc.sh:
-- name: 'Create and Attach the Internet Gateway'
-  spoolig.sh:
-    VpcID: "{{ VpcID }}"
+- name: 'Create the VPC and subnet configurations'
+  ec2_vpc:
+    state: present
+    region: ap-southeast-2
+    resource_tags: {"Name":"coffeemate.network.vpc"}
+    cidr_block: 10.0.0.0/16
+    internet_gateway: true
+    dns_hostnames: yes
+    dns_support: yes
+    subnets:
+      -  cidr: 10.0.16.0/20
+         az: ap-southeast-2a
+         resource_tags: {"Name":"coffeemate.network.subnet.admin.az1"}
+      -  cidr: 10.0.32.0/20
+         az: ap-southeast-2b
+         resource_tags: {"Name":"coffeemate.network.subnet.admin.az2"}
+- name: 'Set up the minimum security groups'
+  ec2_group:
+    name: coffeemate.network.sg.inout.common
+    description: 'Common inbound outbound rules that should apply to all resources'
+    vpc_id: "{{ vpc_id }}"
+    region: ap-southeast-2
+    rules:
+      -  proto: icmp
+         from_port: -1
+         to_port: -1
+         cidr_ip: 0.0.0.0/0
