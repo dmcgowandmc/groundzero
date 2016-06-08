@@ -3,27 +3,72 @@
 - name: 'Create the VPC and subnet configurations'
   ec2_vpc:
     state: present
-    region: ap-southeast-2
-    resource_tags: {"Name":"coffeemate.network.vpc"}
-    cidr_block: 10.0.0.0/16
+    region: "{{ vpc_cfg.region }}"
+    resource_tags: "{{ vpc_cfg.tags }}"
+    cidr_block: "{{ vpc_cfg.cidr }}"
     internet_gateway: true
     dns_hostnames: yes
     dns_support: yes
     subnets:
-      -  cidr: 10.0.16.0/20
-         az: ap-southeast-2a
-         resource_tags: {"Name":"coffeemate.network.subnet.admin.az1"}
-      -  cidr: 10.0.32.0/20
-         az: ap-southeast-2b
-         resource_tags: {"Name":"coffeemate.network.subnet.admin.az2"}
-- name: 'Set up the minimum security groups'
+      -  cidr: "{{ vpc_cfg.subnet_1.cidr }}"
+         az: "{{ vpc_cfg.subnet_1.az }}"
+         resource_tags: "{{ vpc_cfg.subnet_1.tags }}"
+      -  cidr: "{{ vpc_cfg.subnet_2.cidr }}"
+         az: "{{ vpc_cfg.subnet_2.az }}"
+         resource_tags: "{{ vpc_cfg.subnet_2.tags }}"
+  register: vpc
+- name: 'Create {{ vpc_cfg.sg_1.description }}'
   ec2_group:
-    name: coffeemate.network.sg.inout.common
-    description: 'Common inbound outbound rules that should apply to all resources'
-    vpc_id: "{{ vpc_id }}"
-    region: ap-southeast-2
+    name: "{{ vpc_cfg.sg_1.name }}"
+    description: "{{ vpc_cfg.sg_1.description }}"
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ vpc_cfg.region }}"
     rules:
       -  proto: icmp
          from_port: -1
          to_port: -1
-         cidr_ip: 0.0.0.0/0
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+    rules_egress:
+      -  proto: icmp
+         from_port: -1
+         to_port: -1
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+  register: sg_1
+- name: 'Create {{ vpc_cfg.sg_2.description }}'
+  ec2_group:
+    name: "{{ vpc_cfg.sg_2.name }}"
+    description: "{{ vpc_cfg.sg_2.description }}"
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ vpc_cfg.region }}"
+    rules:
+      -  proto: tcp
+         from_port: 22
+         to_port: 22
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+    #Default rule keeps getting created unless a rule overrides. So creating an ICMP rule. Future versions of ansible will support a purge option
+    rules_egress:
+      -  proto: icmp
+         from_port: -1
+         to_port: -1
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+  register: sg_2
+- name: 'Create {{ vpc_cfg.sg_3.description }}'
+  ec2_group:
+    name: "{{ vpc_cfg.sg_3.name }}"
+    description: "{{ vpc_cfg.sg_3.description }}"
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ vpc_cfg.region }}"
+    rules_egress:
+      -  proto: tcp
+         from_port: 80
+         to_port: 80
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+      -  proto: tcp
+         from_port: 53
+         to_port: 53
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+      -  proto: udp
+         from_port: 53
+         to_port: 53
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+  register: sg_3
