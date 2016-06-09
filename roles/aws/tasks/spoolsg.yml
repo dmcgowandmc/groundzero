@@ -1,0 +1,57 @@
+---
+#Create the minimum security groups
+- name: 'Create {{ vpc_cfg.sg_1.description }}'
+  ec2_group:
+    name: "{{ vpc_cfg.sg_1.name }}"
+    description: "{{ vpc_cfg.sg_1.description }}"
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ vpc_cfg.region }}"
+    rules:
+      -  proto: icmp
+         from_port: -1
+         to_port: -1
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+    rules_egress:
+      -  proto: icmp
+         from_port: -1
+         to_port: -1
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+  register: sg_1
+- name: 'Create {{ vpc_cfg.sg_2.description }}'
+  ec2_group:
+    name: "{{ vpc_cfg.sg_2.name }}"
+    description: "{{ vpc_cfg.sg_2.description }}"
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ vpc_cfg.region }}"
+    rules:
+      -  proto: tcp
+         from_port: 22
+         to_port: 22
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+    #Default rule keeps getting created unless a rule overrides. So creating an ICMP rule. Future versions of ansible will support a purge option
+    rules_egress:
+      -  proto: icmp
+         from_port: -1
+         to_port: -1
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+  register: sg_2
+- name: 'Create {{ vpc_cfg.sg_3.description }}'
+  ec2_group:
+    name: "{{ vpc_cfg.sg_3.name }}"
+    description: "{{ vpc_cfg.sg_3.description }}"
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ vpc_cfg.region }}"
+    rules_egress:
+      -  proto: tcp
+         from_port: 80
+         to_port: 80
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+      -  proto: tcp
+         from_port: 53
+         to_port: 53
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+      -  proto: udp
+         from_port: 53
+         to_port: 53
+         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+  register: sg_3

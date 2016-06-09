@@ -1,0 +1,26 @@
+---
+#Create the VPC and mimimum subnets
+- name: 'Create the VPC and subnet configurations'
+  ec2_vpc:
+    state: present
+    region: "{{ vpc_cfg.region }}"
+    resource_tags: "{{ vpc_cfg.tags }}"
+    cidr_block: "{{ vpc_cfg.cidr }}"
+    internet_gateway: true
+    dns_hostnames: yes
+    dns_support: yes
+    subnets:
+      - cidr: "{{ vpc_cfg.subnet_1.cidr }}"
+        az: "{{ vpc_cfg.subnet_1.az }}"
+        resource_tags: "{{ vpc_cfg.subnet_1.tags }}"
+      - cidr: "{{ vpc_cfg.subnet_2.cidr }}"
+        az: "{{ vpc_cfg.subnet_2.az }}"
+        resource_tags: "{{ vpc_cfg.subnet_2.tags }}"
+    route_tables:
+      - subnets:
+          - "{{ vpc_cfg.subnet_1.cidr }}"
+          - "{{ vpc_cfg.subnet_2.cidr }}"
+        routes:
+          - dest: "{{ vpc_cfg.sg_common.cidr }}"
+            gw: igw
+  register: vpc
