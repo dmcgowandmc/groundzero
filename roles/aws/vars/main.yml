@@ -17,7 +17,7 @@ vpc_cfg:
     description: 'Common inbound / outbound rules that should apply to all resources'
   sg_2:
     name: coffeemate.network.sg.in.ssh-ext
-    description: 'Inbound SSH traffic from anywhere. Should be applicable to management server only'
+    description: 'Inbound SSH traffic from anywhere. Should be applicable to bastion server only'
   sg_3:
     name: coffeemate.network.sg.out.all
     description: 'Outbound rule for a range of different protocols. For management and service now servers only'
@@ -31,6 +31,7 @@ ec2_cfg:
     name: coffeemate.keypair.internal
   inst_1:
     tags: {"Name":"coffeemate.ec2.admin.bastion.primary"}
+    disk_tag: {"Name":"coffeemate.vol.admin.bastion"}
   inst_common:
     image: ami-5dbe983e
     group: "coffeemate.ec2.admin"
