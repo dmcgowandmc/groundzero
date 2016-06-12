@@ -1,0 +1,10 @@
+---
+#Create Key Pairs for access to vpc
+- name: 'Creating Key Pairs for {{ ec2_cfg.keypair_1.name }}'
+  ec2_key:
+    region: "{{ ec2_cfg.region }}"
+    name: "{{ ec2_cfg.keypair_1.name }}"
+- name: 'Creating Key Pairs for {{ ec2_cfg.keypair_2.name }}'
+  ec2_key:
+    region: "{{ ec2_cfg.region }}"
+    name: "{{ ec2_cfg.keypair_2.name }}"

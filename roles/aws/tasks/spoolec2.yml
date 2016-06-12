@@ -1,0 +1,23 @@
+---
+#Create the ec2 instances
+#- name: 'Gather facts on existing instances'
+#  ec2_facts:
+- name: 'Create the Basition host. This is the only host directly internet accessible via the internet and is a staging point for maintenance and administration'
+  ec2:
+    region: ap-southeast-2
+    instance_tags: {"Name":"coffeemate.ec2.admin.bastion"}
+    state: present
+    vpc_subnet_id: "{{ vpc.subnets[0].id }}"
+    key_name: "{{ ec2_cfg.keypair_1.name }}"
+    group_id: sg-26e56242
+    instance_type: "{{ ec2_cfg.inst_common.small_inst_type }}"
+    image: "{{ ec2_cfg.inst_common.image }}"
+    volumes:
+      - device_name: /dev/xvda
+        device_type: gp2
+        volume_size: 30
+        delete_on_termination: true
+    wait: yes
+    #wait_timeout: 500
+    #termination_protection: true
+  register: ec2_bastion
