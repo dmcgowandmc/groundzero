@@ -24,3 +24,8 @@
           - dest: "{{ vpc_cfg.sg_common.cidr }}"
             gw: igw
   register: vpc
+- name: 'Setting primary subnet fact (required for ec2 creation later)'
+  set_fact:
+    vpc_pri_subnet: "{{ item.id }}"
+  when: item.az == "{{ vpc_cfg.pri_az }}"
+  with_items: "vpc.subnets"

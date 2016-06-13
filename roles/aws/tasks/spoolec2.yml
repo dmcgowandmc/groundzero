@@ -6,7 +6,7 @@
     instance_tags: "{{ ec2_cfg.inst_1.tags }}"
     exact_count: 1
     count_tag: "{{ ec2_cfg.inst_1.tags }}"
-    vpc_subnet_id: "{{ vpc.subnets[0].id }}"
+    vpc_subnet_id: "{{ vpc_pri_subnet }}"
     key_name: "{{ ec2_cfg.keypair_1.name }}"
     group_id: "{{ sg_1.group_id }},{{ sg_2.group_id }},{{ sg_3.group_id }}" #eventually want this as some sort of loop. But for these servers it can remain static
     instance_type: "{{ ec2_cfg.inst_common.small_inst_type }}"
@@ -18,9 +18,27 @@
         delete_on_termination: true
     wait: yes
   register: ec2_bastion
-#- name: 'Configure snapshots in the event host or entire az becomes unavailable'
-#  ec2_snapshot:
-#    region: "{{ ec2_cfg.region }}"
-#    instance_id: "{{ ec2_bastion.tagged_instances[0].id }}"
-#    device_name: "{{ ec2_bastion.tagged_instances[0].root_device_name }}"
-#  register: ec2_bastion_snap
+- name: 'Acquire elastic IP and assign to bastion host. This is required for external access into network'
+  ec2_eip.py: #Specifically using the 2.0 version of ec2_eip. File exists in library directory
+    region: "{{ ec2_cfg.region }}"
+    in_vpc: true
+    reuse_existing_ip_allowed: true
+    device_id: "{{ ec2_bastion.tagged_instances[0].id }}"
+- name: 'Create the management host. Hosts the primary ansible scripts for maintenance of the environment'
+  ec2:
+    region: "{{ ec2_cfg.region }}"
+    instance_tags: "{{ ec2_cfg.inst_2.tags }}"
+    exact_count: 1
+    count_tag: "{{ ec2_cfg.inst_2.tags }}"
+    vpc_subnet_id: "{{ vpc_pri_subnet }}"
+    key_name: "{{ ec2_cfg.keypair_2.name }}"
+    group_id: "{{ sg_2.group_id }},{{ sg_3.group_id }}" #eventually want this as some sort of loop. But for these servers it can remain static
+    instance_type: "{{ ec2_cfg.inst_common.small_inst_type }}"
+    image: "{{ ec2_cfg.inst_common.image }}"
+    volumes:
+      - device_name: "{{ ec2_cfg.inst_common.small_drive_type.device_name }}"
+        device_type: "{{ ec2_cfg.inst_common.small_drive_type.device_type }}"
+        volume_size: "{{ ec2_cfg.inst_common.small_drive_type.volume_size }}"
+        delete_on_termination: true
+    wait: yes
+  register: ec2_management
