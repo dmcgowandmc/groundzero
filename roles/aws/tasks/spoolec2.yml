@@ -8,7 +8,7 @@
     count_tag: "{{ ec2_cfg.inst_1.tags }}"
     vpc_subnet_id: "{{ vpc_pri_subnet }}"
     key_name: "{{ ec2_cfg.keypair_1.name }}"
-    group_id: "{{ sg_1.group_id }},{{ sg_2.group_id }},{{ sg_3.group_id }}" #eventually want this as some sort of loop. But for these servers it can remain static
+    group_id: "{{ sg_ssh_ext.group_id }},{{ sg_management.group_id }},{{ sg_inout_common.group_id }}" #eventually want this as some sort of loop. But for these servers it can remain static
     instance_type: "{{ ec2_cfg.inst_common.small_inst_type }}"
     image: "{{ ec2_cfg.inst_common.image }}"
     volumes:
@@ -24,6 +24,7 @@
     in_vpc: true
     reuse_existing_ip_allowed: true
     device_id: "{{ ec2_bastion.tagged_instances[0].id }}"
+  register: ec2_bastion_eip
 - name: 'Create the management host. Hosts the primary ansible scripts for maintenance of the environment'
   ec2:
     region: "{{ ec2_cfg.region }}"
@@ -32,7 +33,7 @@
     count_tag: "{{ ec2_cfg.inst_2.tags }}"
     vpc_subnet_id: "{{ vpc_pri_subnet }}"
     key_name: "{{ ec2_cfg.keypair_2.name }}"
-    group_id: "{{ sg_2.group_id }},{{ sg_3.group_id }}" #eventually want this as some sort of loop. But for these servers it can remain static
+    group_id: "{{ sg_management.group_id }},{{ sg_inout_common.group_id }}" #eventually want this as some sort of loop. But for these servers it can remain static
     instance_type: "{{ ec2_cfg.inst_common.small_inst_type }}"
     image: "{{ ec2_cfg.inst_common.image }}"
     volumes:

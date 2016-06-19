@@ -4,3 +4,4 @@
 - include: spoolsg.yml
 - include: spoolkeypair.yml
 - include: spoolec2.yml
+- include: addinventory.yml

@@ -1,0 +1,6 @@
+---
+#Add bastion host to the dynamic inventory (need to decide if will also include management host). Will eventually add the DNS but this was tricky to obtain
+- name: 'Add elastic IP of the bastion host to the inventory dynamically'
+  add_host:
+    name: "{{ ec2_bastion_eip.public_ip }}"
+    group: "{{ ec2_cfg.inst_1.ansible_grp }}"

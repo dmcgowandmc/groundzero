@@ -13,13 +13,13 @@ vpc_cfg:
     cidr: 10.0.32.0/20
     az: ap-southeast-2b
     tags: {"Name":"coffeemate.network.subnet.admin.az2"}
-  sg_1:
+  sg_ssh_ext:
     name: coffeemate.network.sg.in.ssh-ext
     description: 'Inbound SSH traffic from anywhere. Should be applicable to bastion server only'
-  sg_2:
-    name: coffeemate.network.sg.out.all
-    description: 'Outbound rule for a range of different protocols. For management and service now servers only'
-  sg_3:
+  sg_management:
+    name: coffeemate.network.sg.out.mangement
+    description: 'Outbound rule for a range of different protocols required for management. For management and bastion servers only'
+  sg_inout_common:
     name: coffeemate.network.sg.inout.common
     description: 'Common inbound / outbound rules that should apply to all resources'
   sg_common:
@@ -33,6 +33,7 @@ ec2_cfg:
   inst_1:
     tags: {"Name":"coffeemate.ec2.admin.bastion.primary"}
     disk_tag: {"Name":"coffeemate.vol.admin.bastion"}
+    ansible_grp: bastion
   inst_2:
     tags: {"Name":"coffeemate.ec2.admin.management.primary"}
     disk_tag: {"Name":"coffeemate.vol.admin.management"}
