@@ -1,0 +1,6 @@
+---
+#This playbook governs the configuration of the bastion server once it has been spun up
+- hosts: bastion
+  roles:
+    - common
+    - bastion

@@ -33,7 +33,7 @@ ec2_cfg:
   inst_1:
     tags: {"Name":"coffeemate.ec2.admin.bastion.primary"}
     disk_tag: {"Name":"coffeemate.vol.admin.bastion"}
-    ansible_grp: bastion
+    ansible_grp: bastion #WARNING. Dont change this value unless you also update the group_vars configuration
   inst_2:
     tags: {"Name":"coffeemate.ec2.admin.management.primary"}
     disk_tag: {"Name":"coffeemate.vol.admin.management"}

@@ -1,0 +1,3 @@
+---
+#Keys to use for connectivity to the bastion host.
+ansible_ssh_private_key_file: /keypairs/coffeemate.keypair.bastion.pem
