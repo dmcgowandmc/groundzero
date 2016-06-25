@@ -4,3 +4,4 @@
   add_host:
     name: "{{ ec2_bastion_eip.public_ip }}"
     group: "{{ ec2_cfg.inst_1.ansible_grp }}"
+    ansible_ssh_host: "{{ ec2_bastion_eip.public_ip }}"

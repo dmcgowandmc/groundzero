@@ -1,4 +1,10 @@
 ---
-#Perform a ping test to ensure there is connectivity. This is the only task required of the main.yml for common as we are really just ssh back into the same box
+#Common tasks across all servers. Wait to confirm SSH is up on host we are trying to talk to and perform a ping test
+- name: 'Wait until confirmed SSH is up'
+  local_action:
+    module: wait_for
+      host="{{ ansible_ssh_host }}"
+      port=22
+      state=started
 - name: 'Perform a ping test to ensure there is connectivity'
   ping:

@@ -11,7 +11,11 @@
         from_port: 22
         to_port: 22
         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
-    purge_rules_egress: true
+    rules_egress: 
+      - proto: icmp
+        from_port: -1
+        to_port: -1
+        cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
   register: sg_ssh_ext
 - name: 'Create {{ vpc_cfg.sg_management.description }}'
   ec2_group.py: #Specifically using the 2.0 version of ec2_group. File exists in library directory
