@@ -8,7 +8,13 @@
       state=started
 - name: 'Perform a ping test to ensure there is connectivity'
   ping:
-- name: 'Ensure repository is updated'
-  remote_user: sudo
-  apt: 
+- name: 'Update repository DB and upgrade existing packages. This step may take a while'
+  sudo: true
+  apt:
     update_cache: true
+    upgrade: dist
+- name: 'Ensure GIT is installed'
+  sudo: true
+  apt:
+    name: git
+    state: present
