@@ -6,10 +6,11 @@
     name: "{{ ec2_cfg.keypair_1.name }}"
   register: keypair_1
 - name: 'Saving Private Key for {{ ec2_cfg.keypair_1.name }}'
-  copy:
-    content: "{{ keypair_1.key.private_key }}"
-    dest: "groundzero/keypairs/{{ ec2_cfg.keypair_1.name }}.pem"
-    mode: 0600
+  local_action:
+    module: copy
+      content="{{ keypair_1.key.private_key }}"
+      dest="groundzero/keypairs/{{ ec2_cfg.keypair_1.name }}.pem"
+      mode=0600
   when: keypair_1.changed == true
 - name: 'Creating Key Pairs for {{ ec2_cfg.keypair_2.name }}'
   ec2_key:
@@ -17,11 +18,11 @@
     name: "{{ ec2_cfg.keypair_2.name }}"
   register: keypair_2
 - name: 'Saving Private Key for {{ ec2_cfg.keypair_2.name }}'
-  copy:
-    content: "{{ keypair_2.key.private_key }}"
-    dest: "groundzero/keypairs/{{ ec2_cfg.keypair_2.name }}.pem"
-    mode: 0600
+  local_action:
+    module: copy
+      content="{{ keypair_2.key.private_key }}"
+      dest="groundzero/keypairs/{{ ec2_cfg.keypair_2.name }}.pem"
+      mode=0600
   when: keypair_2.changed == true
 
-#NOTE: May need to change copy to fetch as key needs to be stored on the local machine, not the remote machine. Not an issue however if local machine and remote machine are actually the same
-#local_action may be more appropriate
+#local_action used for actual key save as this needs to be done on the ansible host. Not the remote host making the aws calls (in the event ansible host and AWS host is not the same)

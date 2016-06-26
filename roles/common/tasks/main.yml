@@ -8,3 +8,7 @@
       state=started
 - name: 'Perform a ping test to ensure there is connectivity'
   ping:
+- name: 'Ensure repository is updated'
+  remote_user: sudo
+  apt: 
+    update_cache: true
