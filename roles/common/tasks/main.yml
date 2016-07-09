@@ -1,11 +1,5 @@
 ---
-#Common tasks across all servers. Wait to confirm SSH is up on host we are trying to talk to and perform a ping test
-- name: 'Wait until confirmed SSH is up'
-  local_action:
-    module: wait_for
-      host="{{ ansible_ssh_host }}"
-      port=22
-      state=started
+#Common tasks across all servers. We scrapped wait to confirm SSH is up at this level because fact gathering always begins beforehand and script breaks. SSH check happens on final aws task
 - name: 'Perform a ping test to ensure there is connectivity'
   ping:
 - name: 'Update repository DB and upgrade existing packages. This step may take a while'
@@ -17,4 +11,9 @@
   sudo: true
   apt:
     name: git
+    state: present
+- name: 'Ensure Ansible is installed'
+  sudo: true
+  apt:
+    name: ansible
     state: present

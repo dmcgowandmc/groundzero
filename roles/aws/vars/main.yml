@@ -44,6 +44,7 @@ ec2_cfg:
   inst_2:
     tags: {"Name":"coffeemate.ec2.admin.management.primary"}
     disk_tag: {"Name":"coffeemate.vol.admin.management"}
+    ansible_grp: management #WARNING. Dont change this value unless you also update the group_vars configuration
   inst_common:
     image: ami-5dbe983e
     group: "coffeemate.ec2.admin"

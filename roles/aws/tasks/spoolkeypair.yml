@@ -18,11 +18,11 @@
     name: "{{ ec2_cfg.keypair_2.name }}"
   register: keypair_2
 - name: 'Saving Private Key for {{ ec2_cfg.keypair_2.name }}'
-  local_action:
-    module: copy
-      content="{{ keypair_2.key.private_key }}"
-      dest="keypairs/{{ ec2_cfg.keypair_2.name }}.pem"
-      mode=0600
+  copy:
+    content: "{{ keypair_2.key.private_key }}"
+    dest: "keypairs/{{ ec2_cfg.keypair_2.name }}.pem"
+    mode: 0600
+  delegate_to: 127.0.0.1
   when: keypair_2.changed == true
 
 #local_action used for actual key save as this needs to be done on the ansible host. Not the remote host making the aws calls (in the event ansible host and AWS host is not the same)

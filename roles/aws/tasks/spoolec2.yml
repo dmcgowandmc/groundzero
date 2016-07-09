@@ -33,7 +33,7 @@
     count_tag: "{{ ec2_cfg.inst_2.tags }}"
     vpc_subnet_id: "{{ vpc_pri_subnet }}"
     key_name: "{{ ec2_cfg.keypair_2.name }}"
-    group_id: "{{ sg_management.group_id }},{{ sg_inout_common.group_id }}" #eventually want this as some sort of loop. But for these servers it can remain static
+    group_id: "{{ sg_ssh_ext.group_id }},{{ sg_management.group_id }},{{ sg_inout_common.group_id }}" #eventually want this as some sort of loop. But for these servers it can remain static
     instance_type: "{{ ec2_cfg.inst_common.small_inst_type }}"
     image: "{{ ec2_cfg.inst_common.image }}"
     volumes:

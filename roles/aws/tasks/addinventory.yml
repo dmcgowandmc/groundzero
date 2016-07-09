@@ -5,3 +5,8 @@
     name: "{{ ec2_bastion_eip.public_ip }}"
     group: "{{ ec2_cfg.inst_1.ansible_grp }}"
     ansible_ssh_host: "{{ ec2_bastion_eip.public_ip }}"
+- name: 'Add elastic IP of the management host to the inventory dynamically'
+  add_host:
+    name: "{{ ec2_management_eip.public_ip }}"
+    group: "{{ ec2_cfg.inst_2.ansible_grp }}"
+    ansible_ssh_host: "{{ ec2_management_eip.public_ip }}"
