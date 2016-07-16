@@ -1,8 +1,14 @@
 ---
 #Before proceeding any further, make sure SSH is actually up on bastion host or all other steps will fail
 - name: 'Wait until SSH on bastion host is up before proceeding any further'
-  local_action:
-    module: wait_for
-      host="{{ ec2_bastion_eip.public_ip }}"
-      port=22
-      state=started
+  wait_for:
+    host: "{{ ec2_bastion_eip.public_ip }}"
+    port: 22
+    state: started
+  delegate_to: 127.0.0.1
+- name: 'Wait until SSH on bastion host is up before proceeding any further'
+  wait_for:
+    host: "{{ ec2_management_eip.public_ip }}"
+    port: 22
+    state: started
+  delegate_to: 127.0.0.1
