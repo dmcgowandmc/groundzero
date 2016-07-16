@@ -1,0 +1,7 @@
+---
+#Vars for common tasks
+ansible_cfg:
+  control_path_desc: '#Shorten control path name to overcome character limitation'
+  control_path_cfg: 'control_path = %(directory)s/%%h-%%p-%%r'
+  host_key_checking_desc: '#Disable host key checking as hosts can change dynamically'
+  host_key_checking_cfg: 'host_key_checking = False'
