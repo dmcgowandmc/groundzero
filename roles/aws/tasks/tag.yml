@@ -1,0 +1,16 @@
+---
+#Set the tags where this couldn't be done in other standard modules
+- name: 'Set Remaining Tags'
+  ec2_vpc_route_table_facts.py:
+    region: "{{ vpc_cfg.region }}"
+    filters:
+      vpc-id: "{{ vpc.vpc_id }}"
+  register: routetbl_facts
+- ec2_tag:
+    region: "{{ vpc_cfg.region }}"
+    resource: "{{ item.id }}"
+    tags:
+      Name: "{{ vpc_cfg.route_tags }}"
+  with_items: routetbl_facts.route_tables
+#Need to add code to tag internet gateway
+#Need to add code to tag volumes

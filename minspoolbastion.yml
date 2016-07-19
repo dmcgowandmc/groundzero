@@ -1,6 +1,5 @@
 ---
-#This playbook governs the configuration of the bastion server once it has been spun up
+#This playbook governs the configuration of the bastion server once it has been spun up. Note no custom roles, only common role is required
 - hosts: bastion
   roles:
     - common
-    - bastion

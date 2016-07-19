@@ -3,6 +3,8 @@
 vpc_cfg:
   region: ap-southeast-2
   tags: {"Name":"coffeemate.network.vpc"}
+  igtags: {"Name":"coffeemate.network.ig"}
+  route_tags: coffeemate.network.routetbl
   cidr: 10.0.0.0/16
   pri_az: ap-southeast-2a
   subnet_1:
