@@ -1,0 +1,10 @@
+---
+#Perform some cleanup tasks. So far remove the ssh inbound rule to the management server. Due to the simplicity of this script, commands will be directly in this file
+- hosts: groundzero
+  tasks:
+  - name: 'Remove the {{ sg_inout_common.group_id }} group from the management server now its set up'
+    ec2_group_change.sh:
+      region: "{{ vpc.vpc.region }}"
+      instance: "{{ ec2_management.tagged_instances[0].id }}"
+      group_id: "{{ sg_management.group_id }},{{ sg_inout_common.group_id }}"
+    delegate_to: 127.0.0.1
