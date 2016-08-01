@@ -25,7 +25,7 @@ if [[ -s $1 ]]; then
 			INSTANCE=$VALUE
 		elif [ "$KEY" == "group_id" ]; then
 			GROUP_ID=$VALUE
-			GROUP_ID_MOD=${GROUP_ID/,/ }
+			GROUP_ID_MOD=$(echo $VALUE | sed 's/,/\ /g')
 		fi
 	done
 

@@ -50,3 +50,9 @@
     reuse_existing_ip_allowed: true
     device_id: "{{ ec2_management.tagged_instances[0].id }}"
   register: ec2_management_eip
+- name: 'In the event this is a rerun, we need to reassign {{ vpc_cfg.sg_ssh_ext.description }} to the management server'
+  ec2_group_change.sh:
+    region: "{{ vpc.vpc.region }}"
+    instance: "{{ ec2_management.tagged_instances[0].id }}"
+    group_id: "{{ sg_ssh_ext.group_id }},{{ sg_management.group_id }},{{ sg_inout_common.group_id }}"
+  when: ec2_management.changed == false
