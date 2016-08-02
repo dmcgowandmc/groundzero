@@ -1,3 +1,5 @@
 ---
-#Specify the path to the private pem file for the bastion keypair
+#Specify the path to the private pem file for the bastion keypair that groundzero host will use
 ansible_ssh_private_key_file: keypairs/coffeemate.keypair.bastion.pem
+#Specify the path to the private pem file that will be uploaded to the bastion host for communication to other hosts
+ansible_ssh_private_key_upload: keypairs/coffeemate.keypair.internal.pem

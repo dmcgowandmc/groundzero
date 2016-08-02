@@ -1,0 +1,8 @@
+---
+#Upload the private key files. The group_vars configuration ensure the correct private keys are uploaded
+- name: 'Copy the private key as specified in the group vars to ssh directory'
+  copy:
+    src: "{{ ansible_ssh_private_key_upload }}"
+    dest: /home/admin/.ssh/id_rsa
+    mode: 0600
+  when: ansible_ssh_private_key_upload is defined
