@@ -1,0 +1,19 @@
+---
+#Install and configure the AWS console
+- name: 'Install PIP'
+  sudo: true
+  apt:
+    name: python-pip
+    state: present
+- name: 'Check and register if awscli installed'
+  sudo: true
+  shell: pip list | grep aws | wc -l
+  register: awscli_installed
+- name: 'Install AWS Console if not already installed'
+  sudo: true
+  shell: pip install awscli --ignore-installed six
+  when: awscli_installed.stdout == "0"
+- name: 'Update AWS Console if already installed'
+  sudo: true
+  shell: pip install --upgrade awscli
+  when: awscli_installed.stdout == "1"

@@ -32,6 +32,10 @@
         from_port: 80
         to_port: 80
         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+      - proto: tcp
+        from_port: 443
+        to_port: 443
+        cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
   register: sg_management
 - name: 'Create {{ vpc_cfg.sg_inout_common.description }}'
   ec2_group.py: #Specifically using the 2.0 version of ec2_group. File exists in library directory

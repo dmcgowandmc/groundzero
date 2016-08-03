@@ -1,7 +1,9 @@
 #!/bin/bash
 
 #Custom Module to assign security groups as desired. Takes in as minimum a region, instance id, and and one or more security groups. Could have saved myself a lot of trouble if I just built the dam thing in python, but anyway bash
-#it is
+#it is.
+
+#WARNING: This is dependent on the AWS console
 
 #WARNING: The aws command assigns exactly what you provide, so if you only provide one security group, that will be assigned and the rest will be removed
 

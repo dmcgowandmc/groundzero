@@ -12,36 +12,45 @@
   apt:
     name: pciutils
     state: present
+- name: 'Install curl'
+  sudo: true
+  apt:
+    name: curl
+    state: present
 - name: 'Ensure GIT is installed and perform minimum configuration'
   sudo: true
   apt:
     name: git
     state: present
-- name: 'Set global git parameters'
+- name: 'Set system git username'
   sudo: true
-  shell: 'git config --global user.name {{ git_cfg.system_user }}'
-- sudo: true
-  shell: 'git config --global user.email {{ git_cfg.system_email }}'
+  shell: 'git config --system user.name {{ git_cfg.system_user }}'
+- name: 'Set system git email'
+  sudo: true
+  shell: 'git config --system user.email {{ git_cfg.system_email }}'
 - name: 'Ensure Ansible is installed'
   sudo: true
   apt:
     name: ansible
     state: present
 #Not entirely happy with this configuration but was spending to much time on it. Improvements are welcomed
-- name: 'Adjust Ansible configuration for use in AWS'
+- name: 'Check and register if ansible control file path already modified'
   sudo: true
   shell: cat /etc/ansible/ansible.cfg | grep "#CUSTOM SSH CONFIGURATIONS" | wc -l
   register: ansible_sshcfg_detect
-- sudo: true
+- name: 'Check and register if ansible configured to ignore known hosts'
+  sudo: true
   shell: cat /etc/ansible/ansible.cfg | grep "#CUSTOM DEFAULT CONFIGURATIONS" | wc -l
   register: ansible_defcfg_detect
-- sudo: true
+- name: 'Set control path'
+  sudo: true
   lineinfile:
     dest: '/etc/ansible/ansible.cfg'
     insertafter: '^\[ssh\_connection\]'
     line: '\n#CUSTOM SSH CONFIGURATIONS\n{{ ansible_cfg.control_path_desc }}\n{{ ansible_cfg.control_path_cfg }}\n'
   when: ansible_sshcfg_detect.stdout == "0"
-- sudo: true
+- name: 'Set ansible to ignore known hosts'
+  sudo: true
   lineinfile:
     dest: '/etc/ansible/ansible.cfg'
     insertafter: '^\[defaults\]'

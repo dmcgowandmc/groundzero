@@ -1,0 +1,3 @@
+---
+#Tasks specifically for the management server
+- include: installaws.yml

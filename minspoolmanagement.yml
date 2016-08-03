@@ -3,4 +3,4 @@
 - hosts: management
   roles:
     - common
-#    - management
+    - management
