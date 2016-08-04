@@ -16,10 +16,14 @@
       - cidr: "{{ vpc_cfg.subnet_2.cidr }}"
         az: "{{ vpc_cfg.subnet_2.az }}"
         resource_tags: "{{ vpc_cfg.subnet_2.tags }}"
+      - cidr: "{{ vpc_cfg.subnet_3.cidr }}"
+        az: "{{ vpc_cfg.subnet_3.az }}"
+        resource_tags: "{{ vpc_cfg.subnet_3.tags }}"
     route_tables:
       - subnets:
           - "{{ vpc_cfg.subnet_1.cidr }}"
           - "{{ vpc_cfg.subnet_2.cidr }}"
+          - "{{ vpc_cfg.subnet_3.cidr }}"
         routes:
           - dest: "{{ vpc_cfg.sg_common.cidr }}"
             gw: igw
