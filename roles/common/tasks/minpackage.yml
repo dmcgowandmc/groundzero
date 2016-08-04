@@ -28,12 +28,16 @@
 - name: 'Set system git email'
   sudo: true
   shell: 'git config --system user.email {{ git_cfg.system_email }}'
+- name: 'Set global git username'
+  shell: 'git config --global user.email {{ git_cfg.admin_user }}'
+- name: 'Set global git email'
+  shell: 'git config --global user.email {{ git_cfg.admin_email }}'
 - name: 'Ensure Ansible is installed'
   sudo: true
   apt:
     name: ansible
     state: present
-#Not entirely happy with this configuration but was spending to much time on it. Improvements are welcomed
+#Not entirely happy with this configuration but was spending to much time on it. Improvements are welcomed. May look at just setting a custom config on a per user basis
 - name: 'Check and register if ansible control file path already modified'
   sudo: true
   shell: cat /etc/ansible/ansible.cfg | grep "#CUSTOM SSH CONFIGURATIONS" | wc -l
