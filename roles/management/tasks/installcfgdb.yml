@@ -1,0 +1,6 @@
+---
+#This will setup the MySQL configuration DB and populate it with the already created infrastructure details
+- name: Install MySQL
+  apt:
+    name: mysql
+    state: present
