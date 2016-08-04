@@ -29,7 +29,7 @@
   sudo: true
   shell: 'git config --system user.email {{ git_cfg.system_email }}'
 - name: 'Set global git username'
-  shell: 'git config --global user.email {{ git_cfg.admin_user }}'
+  shell: 'git config --global user.name {{ git_cfg.admin_user }}'
 - name: 'Set global git email'
   shell: 'git config --global user.email {{ git_cfg.admin_email }}'
 - name: 'Ensure Ansible is installed'

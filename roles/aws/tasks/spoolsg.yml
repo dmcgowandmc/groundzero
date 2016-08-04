@@ -60,7 +60,7 @@
       - proto: tcp
         to_port: 22
         from_port: 22
-        cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
+        cidr_ip: "{{ vpc_cfg.sg_common.cidr_internal }}"
       - proto: tcp
         from_port: 53
         to_port: 53

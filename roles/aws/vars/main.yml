@@ -30,6 +30,7 @@ vpc_cfg:
     description: 'Common inbound / outbound rules that should apply to all resources'
   sg_common:
     cidr: 0.0.0.0/0
+    cidr_internal: 10.0.0.0/16
 s3_cfg:
   region: ap-southeast-2
   admin:
