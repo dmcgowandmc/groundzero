@@ -8,15 +8,15 @@ vpc_cfg:
   cidr: 10.0.0.0/16
   pri_az: ap-southeast-2a
   subnet_1:
-    cidr: 10.0.16.0/20
+    cidr: 10.0.8.0/21
     az: ap-southeast-2a
     tags: {"Name":"coffeemate.network.subnet.admin.az1"}
   subnet_2:
-    cidr: 10.0.32.0/20
+    cidr: 10.0.16.0/21
     az: ap-southeast-2b
     tags: {"Name":"coffeemate.network.subnet.admin.az2"}
   subnet_3:
-    cidr: 10.0.48.0/20
+    cidr: 10.0.24.0/21
     az: ap-southeast-2c
     tags: {"Name":"coffeemate.network.subnet.admin.az3"}
   sg_ssh_ext:
