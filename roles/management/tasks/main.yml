@@ -1,3 +1,4 @@
 ---
 #Tasks specifically for the management server
 - include: installaws.yml
+- include: setinventory.yml

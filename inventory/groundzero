@@ -1,2 +1,2 @@
 [groundzero]
-ip-172-31-20-253.ap-southeast-2.compute.internal	ansible_ssh_host=ip-172-31-20-253.ap-southeast-2.compute.internal
+ip-172-31-20-253.ap-southeast-2.compute.internal	#ansible_ssh_host=ip-172-31-20-253.ap-southeast-2.compute.internal

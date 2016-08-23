@@ -1,0 +1,7 @@
+#Bastion Host Group
+[bastion]
+{{ hostvars[groups['bastion'][0]].ansible_fqdn }}
+
+#Management Host Group
+[management]
+{{ hostvars[groups['management'][0]].ansible_fqdn }}

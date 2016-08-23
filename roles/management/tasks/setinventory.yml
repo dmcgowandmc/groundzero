@@ -1,0 +1,10 @@
+---
+#Set the default inventory. This will just consist of the primary management host to start with
+- name: 'Set the management host in the default inventory file'
+  sudo: true
+  template:
+    backup: yes
+    force: yes
+    mode: 0644
+    dest: '/etc/ansible/hosts'
+    src: 'hosts.j2'
