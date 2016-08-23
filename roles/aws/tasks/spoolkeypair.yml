@@ -1,5 +1,9 @@
 ---
 #Create Key Pairs for access to vpc
+- name: 'Confirm keypair directory exists'
+  file:
+    path: "{{ playbook_dir }}/keypairs"
+    state: directory
 - name: 'Creating Key Pairs for {{ ec2_cfg.keypair_1.name }}'
   ec2_key:
     region: "{{ ec2_cfg.region }}"
