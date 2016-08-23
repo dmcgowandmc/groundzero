@@ -10,7 +10,7 @@
     content: "{{ keypair_1.key.private_key }}"
     dest: "keypairs/{{ ec2_cfg.keypair_1.name }}.pem"
     mode: 0600
-  delegate_to: 127.0.0.1
+#  delegate_to: 127.0.0.1
   when: keypair_1.changed == true
 - name: 'Creating Key Pairs for {{ ec2_cfg.keypair_2.name }}'
   ec2_key:
@@ -22,8 +22,7 @@
     content: "{{ keypair_2.key.private_key }}"
     dest: "keypairs/{{ ec2_cfg.keypair_2.name }}.pem"
     mode: 0600
-  delegate_to: 127.0.0.1
+#  delegate_to: 127.0.0.1
   when: keypair_2.changed == true
 
-#local_action used for actual key save as this needs to be done on the ansible host. Not the remote host making the aws calls (in the event ansible host and AWS host is not the same)
-#= syntax needs to change. It breaks the keys
+#Delegate commands no longer required as we are forcing the all playbooks for ground zero to be local

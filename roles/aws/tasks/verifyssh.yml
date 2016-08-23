@@ -5,10 +5,12 @@
     host: "{{ ec2_bastion_eip.public_ip }}"
     port: 22
     state: started
-  delegate_to: 127.0.0.1
+  #delegate_to: 127.0.0.1
 - name: 'Wait until SSH on management host is up before proceeding any further'
   wait_for:
     host: "{{ ec2_management_eip.public_ip }}"
     port: 22
     state: started
-  delegate_to: 127.0.0.1
+  #delegate_to: 127.0.0.1
+
+#Delegate no longer required as all playbooks for ground zero will now be local

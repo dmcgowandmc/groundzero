@@ -1,2 +1,2 @@
 [groundzero]
-ip-172-31-20-253.ap-southeast-2.compute.internal	#ansible_ssh_host=ip-172-31-20-253.ap-southeast-2.compute.internal
+127.0.0.1 ansible_connection=local #Ground zero should always be local

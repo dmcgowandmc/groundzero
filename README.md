@@ -12,14 +12,13 @@ but will need to leave to a later date.
 # Prerequisites
 
 * AWS Account
-* One host with Ansible 1.7 or higher installed.
-* (Optional) A second host to install and configure AWS console. Otherwise just use the Ansible host
+* One host in AWS with Ansible 1.7 or higher installed.
 
 # Install and Configuration
 
-* Create group "VPCAdmin" with "AmazonVPCFullAccess" policy
-* Create group "ec2Admin" with "AmazonEC2FullAccess" policy
-* Create group "s3Admin" with "AmazonS3FullAccess" policy
+* Create group "GroundzeroAdmin"
+* Add to "GroundzeroAdmin" the "AmazonVPCFullAccess", "AmazonEC2FullAccess" and "AmazonS3FullAccess" policy
+# EXPERIMENTING WITH DIFFERENT SETUP. INSTRUCTIONS WILL BE UPDATED OR ROLLED BACK DEPENDING ON RESULTS
 * Create IAM user "groundzero" and assign previous three groups. Save Keys
 * Either on Ansible host or a different host, install and configure AWS console http://docs.aws.amazon.com/cli/latest/userguide/installing.html and use groundzero credentials. Ensure Ansible host can SSH into second host or itself if the host
 
