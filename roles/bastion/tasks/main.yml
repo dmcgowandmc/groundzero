@@ -1,0 +1,5 @@
+---
+#Configuration tasks for bastion only
+- include: sshjump.yml
+- debug:
+    msg: "{{ hostvars[groups['groundzero'][0]].ec2_management.tagged_instances[0].private_dns_name }}"

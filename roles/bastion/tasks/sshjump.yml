@@ -1,0 +1,8 @@
+---
+#Insert a .sh file into the bastion host to easily ssh to the management server
+- name: 'Adding .sh file to admin dir to ssh into management server'
+  template:
+    dest: /home/admin/
+    force: yes
+    mode: 0744
+    src: gotomanagement.sh.j2
