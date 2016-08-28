@@ -2,7 +2,7 @@
 
 Groundzero Ansible Scripts are responsible for bootstrap the minimum environment for Coffeemate. Once minimum environment is configured, coffeemates own management server will configure the remaining environment.
 
-At minimum, this will create a VPC with two admin subnets across two availability zones and two ec2 instances wrapped in some strong security groups. Two hosts include a bastion host for external users to log in
+At minimum, this will create a VPC with three admin subnets across three availability zones and two ec2 instances wrapped in some strong security groups. Two hosts include a bastion host for external users to log in
 and a management host which will be used for automated management of the rest of the environment. Was also planning to implement automated backup and failover of the instances to the second availability zone but
 due to the complexity I am leaving it out of this package for now. Will be implemented and maintained on the management server.
 
