@@ -12,16 +12,25 @@ but will need to leave to a later date.
 # Prerequisites
 
 * AWS Account
-* One host in AWS with Ansible 1.7 or higher installed.
+* One Debian host with Ansible 1.7 or higher installed.
+* OR
+* Create a Debian host in AWS with Ansible following steps below
 
-# Install and Configuration
+# Install and Configuration for Existing host
 
 * Create group "GroundzeroAdmin"
 * Add to "GroundzeroAdmin" the "AmazonVPCFullAccess", "AmazonEC2FullAccess" and "AmazonS3FullAccess" policy
-# EXPERIMENTING WITH DIFFERENT SETUP. INSTRUCTIONS WILL BE UPDATED OR ROLLED BACK DEPENDING ON RESULTS
-* Create IAM user "groundzero" and assign previous three groups. Save Keys
-* Either on Ansible host or a different host, install and configure AWS console http://docs.aws.amazon.com/cli/latest/userguide/installing.html and use groundzero credentials. Ensure Ansible host can SSH into second host or itself if the host
+* Create IAM user "groundzero" and assign "GroundzeroAdmin" group
+* On existing host, install and configure AWS console http://docs.aws.amazon.com/cli/latest/userguide/installing.html and use "groundzero" credentials.
+
+# Install and Configuration for New AWS Host (this method is more secure)
+
+* Create Amazon EC2 role "GroundzeroAuth"
+* Add to "GroundzeroAuth" the "AmazonVPCFullAccess", "AmazonEC2FullAccess" and "AmazonS3FullAccess" policy
+* Create new EC2 instance and request to use the "GroundzeroAuth" during creation
+* Once new host is set up, install and configure AWS console http://docs.aws.amazon.com/cli/latest/userguide/installing.html and ignore setting up credentials
+* Ensure this repository is cloned to the new host and run from there
 
 # Run instructions
 
-* ansible-playbook -i inventory/groundzero site.yml -vvvv
+* ansible-playbook -i inventory/groundzero site.yml -vvvv (the -vvvv is optional)
