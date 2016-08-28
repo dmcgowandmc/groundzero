@@ -5,28 +5,22 @@
     path: "{{ playbook_dir }}/keypairs"
     state: directory
 - name: 'Creating Key Pairs for {{ ec2_cfg.keypair_1.name }}'
+  ansible-ssh-keygen.sh:
+    comment: "{{ ec2_cfg.keypair_1.name }}"
+- name: 'Uploading Key Pairs for {{ ec2_cfg.keypair_1.name }} to AWS'
   ec2_key:
     region: "{{ ec2_cfg.region }}"
     name: "{{ ec2_cfg.keypair_1.name }}"
+    key_material: "{{ item }}"
+  with_file: "{{ playbook_dir }}/keypairs/{{ ec2_cfg.keypair_1.name }}.pub"
   register: keypair_1
-- name: 'Saving Private Key for {{ ec2_cfg.keypair_1.name }}'
-  copy: 
-    content: "{{ keypair_1.key.private_key }}"
-    dest: "keypairs/{{ ec2_cfg.keypair_1.name }}.pem"
-    mode: 0600
-#  delegate_to: 127.0.0.1
-  when: keypair_1.changed == true
 - name: 'Creating Key Pairs for {{ ec2_cfg.keypair_2.name }}'
+  ansible-ssh-keygen.sh:
+    comment: "{{ ec2_cfg.keypair_2.name }}"
+- name: 'Uploading Key Pairs for {{ ec2_cfg.keypair_2.name }} to AWS'
   ec2_key:
     region: "{{ ec2_cfg.region }}"
     name: "{{ ec2_cfg.keypair_2.name }}"
+    key_material: "{{ item }}"
+  with_file: "{{ playbook_dir }}/keypairs/{{ ec2_cfg.keypair_2.name }}.pub"
   register: keypair_2
-- name: 'Saving Private Key for {{ ec2_cfg.keypair_2.name }}'
-  copy:
-    content: "{{ keypair_2.key.private_key }}"
-    dest: "keypairs/{{ ec2_cfg.keypair_2.name }}.pem"
-    mode: 0600
-#  delegate_to: 127.0.0.1
-  when: keypair_2.changed == true
-
-#Delegate commands no longer required as we are forcing the all playbooks for ground zero to be local
