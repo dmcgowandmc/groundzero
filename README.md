@@ -33,4 +33,4 @@ but will need to leave to a later date.
 
 # Run instructions
 
-* ansible-playbook -i inventory/groundzero site.yml -vvvv (the -vvvv is optional)
+* ansible-playbook -i inventory/groundzero minspoolall.yml -vvvv (the -vvvv is optional)
