@@ -1,0 +1,3 @@
+---
+#Create role which will be assigned to management ec2 so it can perform administration duties
+- name: ''
