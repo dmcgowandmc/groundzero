@@ -3,6 +3,7 @@
 - include: spools3.yml
 - include: spoolvpc.yml
 - include: spoolsg.yml
+- include: spooliam.yml
 - include: spoolkeypair.yml
 - include: spoolec2.yml
 - include: tag.yml
