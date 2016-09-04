@@ -7,6 +7,8 @@
 
 #WARNING: The aws command assigns exactly what you provide, so if you only provide one security group, that will be assigned and the rest will be removed
 
+#FUTURE ENHANCEMENTS: Eventually want this to detect current group assignment and if request matches whats already there, return a changed=false
+
 REGION=""
 INSTANCE=""
 GROUP_ID=""
@@ -33,10 +35,10 @@ if [[ -s $1 ]]; then
 
 	ERRMSG=$(aws --region $REGION ec2 modify-instance-attribute --instance-id $INSTANCE --groups $GROUP_ID_MOD 2>&1 | tr -d "\n")
 
-	if [[ ! -z $ERRMSG ]]; then
-		echo "{\"failed\":\"true\",\"msg\":\"$ERRMSG\"}"
-	else
+	if [[ $(echo $ERRMSG | jshon -e return | sed 's/\"//g') == "true" ]]; then
 		echo "{\"changed\":\"True\"}"
+	else
+		echo "{\"failed\":\"true\",\"msg\":\"$ERRMSG\"}"
 	fi
 else
 	echo "{\"failed\":\"True\",\"msg\":\"Must Provide a Region, Instance ID and one or more security groups\"}"
