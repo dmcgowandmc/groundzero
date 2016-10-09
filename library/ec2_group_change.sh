@@ -35,7 +35,9 @@ if [[ -s $1 ]]; then
 
 	ERRMSG=$(aws --region $REGION ec2 modify-instance-attribute --instance-id $INSTANCE --groups $GROUP_ID_MOD 2>&1 | tr -d "\n")
 
-	if [[ $(echo $ERRMSG | jshon -e return | sed 's/\"//g') == "true" ]]; then
+	#UNSURE IF AWSCLI DEFAULT BEHAVIOUR HAS CHANGED OR THERE IS A CONFIGURATION ISSUE. BUT SUCCESS NOW RETURNS NOTHING. SO IF STATEMENT WILL JUST DETECT IF $ERRMSG IS FALSE
+	#if [[ $(echo $ERRMSG | jshon -e return | sed 's/\"//g') == "true" ]]; then
+	if [[ $ERRMSG == "" ]]; then
 		echo "{\"changed\":\"True\"}"
 	else
 		echo "{\"failed\":\"true\",\"msg\":\"$ERRMSG\"}"
