@@ -1,4 +1,4 @@
 ---
 #Perform a range of common tasks across all hosts include the ground zero server
 - include: minpackage.yml
-- include: privatekey.yml
+- include: uploadkey.yml

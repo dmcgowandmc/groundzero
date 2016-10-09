@@ -3,5 +3,7 @@
 ansible_ssh_private_key_file: keypairs/coffeemate.keypair.bastion.pem
 #Specify the path to the private pem file that will be uploaded to the bastion host for communication to other hosts
 ansible_ssh_private_key_upload: keypairs/coffeemate.keypair.internal.pem
+#Specify the path to the public key file that will be uploaded to the bastion host which can be provided to other resources such as github
+ansible_ssh_public_key_upload: keypairs/coffeemate.keypair.internal.pub
 #Specify the path to the public ssh file that will be added to the authorized users
 ansible_sshpublic_key_authorize: keypairs/coffeemate.keypair.internal.pub
