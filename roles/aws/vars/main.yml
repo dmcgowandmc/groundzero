@@ -46,6 +46,8 @@ iam_cfg:
     policy1: AmazonEC2FullAccess
     policy2: AmazonS3FullAccess
     policy3: AmazonVPCFullAccess
+    policy4: AmazonRDSFullAccess
+    policy5: AmazonElastiCacheFullAccess
 ec2_cfg:
   region: ap-southeast-2
   keypair_1:
