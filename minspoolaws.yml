@@ -1,5 +1,5 @@
 ---
-#This playbook governs the minumum setup required in AWS before control can be handed to the management server for further setup
+#This playbook will ensure groundzero host is configured to standard then use the aws riole to spin up AWS components. This must be run before any other playbooks as this will create the hosts used by the other playbooks
 - hosts: groundzero
   roles:
     - common

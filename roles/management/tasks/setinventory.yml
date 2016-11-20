@@ -1,5 +1,10 @@
 ---
 #Set the default inventory. This will just consist of the primary management host to start with
+- name: 'Confirm /etc/ansible directory exists'
+  sudo: true
+  file:
+    path: "/etc/ansible"
+    state: directory
 - name: 'Set the management host in the default inventory file'
   sudo: true
   template:

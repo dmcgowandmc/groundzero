@@ -12,24 +12,30 @@ but will need to leave to a later date.
 # Prerequisites
 
 * AWS Account
-* One Debian host with Ansible 1.7 or higher installed.
+* One Debian host with Ansible 2.0 or higher installed.
 * OR
-* Create a Debian host in AWS with Ansible following steps below
+* Create a Debian host in AWS with Ansible 2.0 or higher installed
 
-# Install and Configuration for Existing host
+# Pre Configuration for Existing host or External host outside AWS
 
 * Create group "GroundzeroAdmin"
 * Add to "GroundzeroAdmin" the "AmazonVPCFullAccess", "AmazonEC2FullAccess" and "AmazonS3FullAccess" policy
 * Create IAM user "groundzero" and assign "GroundzeroAdmin" group
 * On existing host, install and configure AWS console http://docs.aws.amazon.com/cli/latest/userguide/installing.html and use "groundzero" credentials.
 
-# Install and Configuration for New AWS Host (this method is more secure)
+# Pre Configuration for New AWS Host (this method is more secure)
 
 * Create Amazon EC2 role "GroundzeroAuth"
 * Add to "GroundzeroAuth" the "AmazonVPCFullAccess", "AmazonEC2FullAccess" and "AmazonS3FullAccess" policy
 * Create new EC2 instance and request to use the "GroundzeroAuth" during creation
 * Once new host is set up, install and configure AWS console http://docs.aws.amazon.com/cli/latest/userguide/installing.html and ignore setting up credentials
 * Ensure this repository is cloned to the new host and run from there
+
+# Ansible 2.0 or higher install for Debian 8 (apt-get directly only gives you ansible 1.7)
+
+* Install base packages. sudo apt-get install build-essential libssl-dev libffi-dev python-dev python-pip
+* Install Cryptography Module. sudo pip install cryptography --upgrade
+* Install Ansible. sudo pip install ansible --upgrade
 
 # Run instructions
 

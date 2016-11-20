@@ -1,14 +1,14 @@
 ---
 #Create the base S3 buckets for system level and application level storage
 - name: 'Create and configure the admin S3 bucket. No public access'
-  s3.py: #Using version 2.0 of s3 as standard version has a bug which doesn't like . in the bucket name
+  s3:
     region: "{{ s3_cfg.region }}"
     bucket: "{{ s3_cfg.admin.name }}"
     object: "{{ s3_cfg.admin.f1 }}"
     mode: create
   register: s3_admin
 - name: 'Create and configure the public S3 bucket. Variable levels of public access'
-  s3.py: #Using version 2.0 of s3 as standard version has a bug which doesn't like . in the bucket name
+  s3:
     region: "{{ s3_cfg.region }}"
     bucket: "{{ s3_cfg.public.name }}"
     mode: create

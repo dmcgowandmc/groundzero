@@ -1,40 +1,40 @@
 ---
 #Create role which will be assigned to management ec2 so it can perform administration duties
 - name: 'Create {{ iam_cfg.name }} role'
-  iam.py:
+  iam:
     iam_type: role
     name: "{{ iam_cfg.name }}"
     state: present
 - name: 'Assign {{ iam_cfg.policies.policy1 }} policy to {{ iam_cfg.name }}'
-  iam_policy.py:
+  iam_policy:
     iam_type: role
     iam_name: "{{ iam_cfg.name }}"
     policy_name: "{{ iam_cfg.policies.policy1 }}"
     policy_document: "roles/aws/json/{{ iam_cfg.policies.policy1 }}.json"
     state: present
 - name: 'Assign {{ iam_cfg.policies.policy2 }} policy to {{ iam_cfg.name }}'
-  iam_policy.py:
+  iam_policy:
     iam_type: role
     iam_name: "{{ iam_cfg.name }}"
     policy_name: "{{ iam_cfg.policies.policy2 }}"
     policy_document: "roles/aws/json/{{ iam_cfg.policies.policy2 }}.json"
     state: present
 - name: 'Assign {{ iam_cfg.policies.policy3 }} policy to {{ iam_cfg.name }}'
-  iam_policy.py:
+  iam_policy:
     iam_type: role
     iam_name: "{{ iam_cfg.name }}"
     policy_name: "{{ iam_cfg.policies.policy3 }}"
     policy_document: "roles/aws/json/{{ iam_cfg.policies.policy3 }}.json"
     state: present
 - name: 'Assign {{ iam_cfg.policies.policy4 }} policy to {{ iam_cfg.name }}'
-  iam_policy.py:
+  iam_policy:
     iam_type: role
     iam_name: "{{ iam_cfg.name }}"
     policy_name: "{{ iam_cfg.policies.policy4 }}"
     policy_document: "roles/aws/json/{{ iam_cfg.policies.policy4 }}.json"
     state: present
 - name: 'Assign {{ iam_cfg.policies.policy5 }} policy to {{ iam_cfg.name }}'
-  iam_policy.py:
+  iam_policy:
     iam_type: role
     iam_name: "{{ iam_cfg.name }}"
     policy_name: "{{ iam_cfg.policies.policy5 }}"

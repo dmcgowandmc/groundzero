@@ -1,7 +1,7 @@
 ---
 #Create the minimum security groups
 - name: 'Create {{ vpc_cfg.sg_ssh_ext.description }}'
-  ec2_group.py: #Specifically using the 2.0 version of ec2_group. File exists in library directory
+  ec2_group:
     name: "{{ vpc_cfg.sg_ssh_ext.name }}"
     description: "{{ vpc_cfg.sg_ssh_ext.description }}"
     vpc_id: "{{ vpc.vpc_id }}"
@@ -18,7 +18,7 @@
         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
   register: sg_ssh_ext
 - name: 'Create {{ vpc_cfg.sg_management.description }}'
-  ec2_group.py: #Specifically using the 2.0 version of ec2_group. File exists in library directory
+  ec2_group:
     name: "{{ vpc_cfg.sg_management.name }}"
     description: "{{ vpc_cfg.sg_management.description }}"
     vpc_id: "{{ vpc.vpc_id }}"
@@ -38,7 +38,7 @@
         cidr_ip: "{{ vpc_cfg.sg_common.cidr }}"
   register: sg_management
 - name: 'Create {{ vpc_cfg.sg_inout_common.description }}'
-  ec2_group.py: #Specifically using the 2.0 version of ec2_group. File exists in library directory
+  ec2_group:
     name: "{{ vpc_cfg.sg_inout_common.name }}"
     description: "{{ vpc_cfg.sg_inout_common.description }}"
     vpc_id: "{{ vpc.vpc_id }}"

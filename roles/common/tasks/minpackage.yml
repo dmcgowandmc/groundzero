@@ -1,3 +1,4 @@
+
 ---
 #Install and configure minimum software packages for each host
 - name: 'Perform a ping test to ensure there is connectivity'
@@ -40,31 +41,42 @@
   shell: 'git config --global user.name {{ git_cfg.admin_user }}'
 - name: 'Set global GIT email'
   shell: 'git config --global user.email {{ git_cfg.admin_email }}'
-- name: 'Ensure Ansible is installed'
+- name: 'Ansible Build Essentials'
   sudo: true
   apt:
-    name: ansible
+    name: build-essential
     state: present
-#Not entirely happy with this configuration but was spending to much time on it. Improvements are welcomed. May look at just setting a custom config on a per user basis
-- name: 'Check and register if ansible control file path already modified'
+- name: 'Ansible Build Essentials'
   sudo: true
-  shell: cat /etc/ansible/ansible.cfg | grep "#CUSTOM SSH CONFIGURATIONS" | wc -l
-  register: ansible_sshcfg_detect
-- name: 'Check and register if ansible configured to ignore known hosts'
+  apt:
+    name: libssl-dev
+    state: present
+- name: 'Ansible Build Essentials'
   sudo: true
-  shell: cat /etc/ansible/ansible.cfg | grep "#CUSTOM DEFAULT CONFIGURATIONS" | wc -l
-  register: ansible_defcfg_detect
-- name: 'Set control path'
+  apt:
+    name: libffi-dev
+    state: present
+- name: 'Ansible Build Essentials'
   sudo: true
-  lineinfile:
-    dest: '/etc/ansible/ansible.cfg'
-    insertafter: '^\[ssh\_connection\]'
-    line: '\n#CUSTOM SSH CONFIGURATIONS\n{{ ansible_cfg.control_path_desc }}\n{{ ansible_cfg.control_path_cfg }}\n'
-  when: ansible_sshcfg_detect.stdout == "0"
-- name: 'Set ansible to ignore known hosts'
+  apt:
+    name: python-dev
+    state: present
+- name: 'Ansible Build Essentials'
   sudo: true
-  lineinfile:
-    dest: '/etc/ansible/ansible.cfg'
-    insertafter: '^\[defaults\]'
-    line: '\n#CUSTOM DEFAULT CONFIGURATIONS\n{{ ansible_cfg.host_key_checking_desc }}\n{{ ansible_cfg.host_key_checking_cfg }}'
-  when: ansible_defcfg_detect.stdout == "0"
+  apt:
+    name: python-pip
+    state: present
+- name: 'Install Cryptography Module'
+  sudo: true
+  shell: sudo pip install cryptography --upgrade
+- name: 'Install Ansible by PIP (this ensures we use the latest version on Debian)'
+  sudo: true
+  shell: sudo pip install ansible --upgrade
+- name: 'Set Ansible Custom Configurations Required for Proper Operation in AWS'
+  sudo: true
+  template:
+    backup: no
+    force: yes
+    mode: 0644
+    dest: '/home/admin/.ansible.cfg'
+    src: '.ansible.cfg.j2'

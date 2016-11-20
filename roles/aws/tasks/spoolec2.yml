@@ -19,7 +19,7 @@
     wait: yes
   register: ec2_bastion
 - name: 'Acquire elastic IP and assign to bastion host. This is required for external access into network'
-  ec2_eip.py: #Specifically using the 2.0 version of ec2_eip. File exists in library directory
+  ec2_eip:
     region: "{{ ec2_cfg.region }}"
     in_vpc: true
     reuse_existing_ip_allowed: true
@@ -45,7 +45,7 @@
     wait: yes
   register: ec2_management
 - name: 'Acquire elastic IP and assign to management host. This is required for external access into network'
-  ec2_eip.py: #Specifically using the 2.0 version of ec2_eip. File exists in library directory
+  ec2_eip: 
     region: "{{ ec2_cfg.region }}"
     in_vpc: true
     reuse_existing_ip_allowed: true

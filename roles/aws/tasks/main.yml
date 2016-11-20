@@ -1,5 +1,5 @@
 ---
-#Will begin the process of bringing up the minimum components in AWS. Once minimum components are completed, the management server will take over for the rest of the configuration
+#Will begin the process of bringing up the minimum components in AWS. Once completed, other playbooks can be successfully run
 - include: spools3.yml
 - include: spoolvpc.yml
 - include: spoolsg.yml
