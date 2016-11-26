@@ -1,5 +1,5 @@
 ---
-#This playbook will ensure groundzero host is configured to standard then use the aws riole to spin up AWS components. This must be run before any other playbooks as this will create the hosts used by the other playbooks
+#This playbook will ensure groundzero host is configured to standard then use the aws role to spin up AWS components. This must be run before any other playbooks as this will create the hosts used by the other playbooks and add to the inventory
 - hosts: groundzero
   roles:
     - common

@@ -1,0 +1,24 @@
+---
+#EC2 Configuration
+ec2_cfg:
+  region: ap-southeast-2
+  keypair_1:
+    name: coffeemate.keypair.bastion
+  keypair_2:
+    name: coffeemate.keypair.internal
+  inst_1:
+    tags: {"Name":"coffeemate.ec2.admin.bastion.primary"}
+    disk_tag: {"Name":"coffeemate.vol.admin.bastion"}
+    ansible_grp: bastion #WARNING. Dont change this value unless you also update the group_vars configuration
+  inst_2:
+    tags: {"Name":"coffeemate.ec2.admin.management.primary"}
+    disk_tag: {"Name":"coffeemate.vol.admin.management"}
+    ansible_grp: management #WARNING. Dont change this value unless you also update the group_vars configuration
+  inst_common:
+    image: ami-8e97a7ed
+    group: "coffeemate.ec2.admin"
+    small_inst_type: t2.micro
+    small_drive_type:
+      device_name: /dev/xvda
+      device_type: gp2
+      volume_size: 30

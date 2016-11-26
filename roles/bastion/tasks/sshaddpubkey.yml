@@ -1,5 +1,5 @@
 ---
-#By default the bastion public key is added to authorized hosts file, however we also want to add the internal public key so the management server and service the bastion host as required
+#By default the bastion public key is added to authorized hosts file, however we also want to add the internal public key so the management server can service the bastion host as required
 - name: 'Adding internal public key to authorized host file'
   authorized_key:
     user: admin

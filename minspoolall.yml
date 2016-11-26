@@ -1,5 +1,5 @@
 ---
-#Main Playbook. Call on the minspoolaws.yml file to trigger further tasks
+#Main Playbook. Call on each of the main playbooks
 - include: minspoolaws.yml
 - include: minspoolbastion.yml
 - include: minspoolmanagement.yml

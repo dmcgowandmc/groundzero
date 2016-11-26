@@ -1,4 +1,6 @@
 ---
 #Perform a range of common tasks across all hosts include the ground zero server
-- include: minpackage.yml
+- include: packagebase.yml
+- include: packagegit.yml
+- include: packageansible.yml
 - include: uploadkey.yml

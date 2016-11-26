@@ -1,0 +1,33 @@
+---
+#VPC Configuration Vars
+vpc_cfg:
+  region: ap-southeast-2
+  tags: {"Name":"coffeemate.network.vpc"}
+  igtags: {"Name":"coffeemate.network.ig"}
+  route_tags: coffeemate.network.routetbl
+  cidr: 10.0.0.0/16
+  pri_az: ap-southeast-2a
+  subnet_1:
+    cidr: 10.0.8.0/21
+    az: ap-southeast-2a
+    tags: {"Name":"coffeemate.network.subnet.admin.az1"}
+  subnet_2:
+    cidr: 10.0.16.0/21
+    az: ap-southeast-2b
+    tags: {"Name":"coffeemate.network.subnet.admin.az2"}
+  subnet_3:
+    cidr: 10.0.24.0/21
+    az: ap-southeast-2c
+    tags: {"Name":"coffeemate.network.subnet.admin.az3"}
+  sg_ssh_ext:
+    name: coffeemate.network.sg.in.ssh-ext
+    description: 'Inbound SSH traffic from anywhere. Should be applicable to bastion server only'
+  sg_management:
+    name: coffeemate.network.sg.out.mangement
+    description: 'Outbound rule for a range of different protocols required for management. For management and bastion servers only'
+  sg_inout_common:
+    name: coffeemate.network.sg.inout.common
+    description: 'Common inbound / outbound rules that should apply to all resources'
+  sg_common:
+    cidr: 0.0.0.0/0
+    cidr_internal: 10.0.0.0/16

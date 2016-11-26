@@ -1,5 +1,9 @@
 ---
 #Will begin the process of bringing up the minimum components in AWS. Once completed, other playbooks can be successfully run
+- include_vars: vpc_cfg.yml
+- include_vars: s3_cfg.yml
+- include_vars: iam_cfg.yml
+- include_vars: ec2_cfg.yml
 - include: spools3.yml
 - include: spoolvpc.yml
 - include: spoolsg.yml

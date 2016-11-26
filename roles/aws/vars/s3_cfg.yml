@@ -1,0 +1,9 @@
+---
+#S3 Configuration Vars
+s3_cfg:
+  region: ap-southeast-2
+  admin:
+    name: coffeemate.s3.admin
+    f1: snapshots
+  public:
+    name: coffeemate.s3.public

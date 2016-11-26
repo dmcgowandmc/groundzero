@@ -1,0 +1,20 @@
+---
+#Install and configure GIT
+- name: 'Install GIT'
+  sudo: true
+  apt:
+    name: git
+    state: present
+- name: 'Set system GIT username'
+  sudo: true
+  shell: 'git config --system user.name {{ git_cfg.system_user }}'
+- name: 'Set system GIT email'
+  sudo: true
+  shell: 'git config --system user.email {{ git_cfg.system_email }}'
+- name: 'Set system wide config to use simple mode for push to remote repositories'
+  sudo: true
+  shell: 'git config --system push.default simple'
+- name: 'Set global GIT username'
+  shell: 'git config --global user.name {{ git_cfg.admin_user }}'
+- name: 'Set global GIT email'
+  shell: 'git config --global user.email {{ git_cfg.admin_email }}'
