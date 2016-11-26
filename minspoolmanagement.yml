@@ -1,6 +1,7 @@
 ---
 #This playbook governs the configuration of the management server once it has been spun up. Run the standard common role and custom configuration in the management role
 - hosts: management #management host group is created upon successful completion of the minspoolaws.yml playbook
+  remote_user: admin
   roles:
     - common
     - management

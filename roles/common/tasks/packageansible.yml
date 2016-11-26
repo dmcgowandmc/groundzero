@@ -1,5 +1,8 @@
 ---
 #As of the time this was built, apt-get only supported ansible 1.7 which is to old. So we are using pip installer to ensure latest version is installed. Ansible 2.0 or greater
+- name: 'Get and Store Current User. Needed for Later'
+  shell: whoami
+  register: whoami
 - name: 'Ansible Build Essentials'
   become: true
   become_method: sudo
@@ -45,5 +48,5 @@
     backup: no
     force: yes
     mode: 0644
-    dest: '/home/admin/.ansible.cfg'
+    dest: '/home/{{ whoami.stdout }}/.ansible.cfg'
     src: '.ansible.cfg.j2'

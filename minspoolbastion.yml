@@ -1,6 +1,7 @@
 ---
 #This playbook governs the configuration of the bastion server once it has been spun up. Run the common role and perform custom tasks under the bastion role
 - hosts: bastion #bastion host group is created dynamically upon successful completion of the minspoolaws.yml playbook.
+  remote_user: admin
   roles:
     - common
     - bastion
