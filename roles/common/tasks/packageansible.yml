@@ -1,38 +1,46 @@
 ---
 #As of the time this was built, apt-get only supported ansible 1.7 which is to old. So we are using pip installer to ensure latest version is installed. Ansible 2.0 or greater
 - name: 'Ansible Build Essentials'
-  sudo: true
+  become: true
+  become_method: sudo
   apt:
     name: build-essential
     state: present
 - name: 'Ansible Build Essentials'
-  sudo: true
+  become: true
+  become_method: sudo
   apt:
     name: libssl-dev
     state: present
 - name: 'Ansible Build Essentials'
-  sudo: true
+  become: true
+  become_method: sudo
   apt:
     name: libffi-dev
     state: present
 - name: 'Ansible Build Essentials'
-  sudo: true
+  become: true
+  become_method: sudo
   apt:
     name: python-dev
     state: present
 - name: 'Ansible Build Essentials'
-  sudo: true
+  become: true
+  become_method: sudo
   apt:
     name: python-pip
     state: present
 - name: 'Install Cryptography Module'
-  sudo: true
+  become: true
+  become_method: sudo
   shell: sudo pip install cryptography --upgrade
 - name: 'Install Ansible by PIP (this ensures we use the latest version on Debian)'
-  sudo: true
+  become: true
+  become_method: sudo
   shell: sudo pip install ansible --upgrade
 - name: 'Set Ansible Custom Configurations Required for Proper Operation in AWS'
-  sudo: true
+  become: true
+  become_method: sudo
   template:
     backup: no
     force: yes

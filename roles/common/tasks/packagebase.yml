@@ -3,22 +3,26 @@
 - name: 'Perform a ping test to ensure there is connectivity'
   ping:
 - name: 'Update repository DB and upgrade existing packages. This step may take a while'
-  sudo: true
+  become: true
+  become_method: sudo
   apt:
     update_cache: true
     upgrade: dist
 - name: 'Install pciutils for administration'
-  sudo: true
+  become: true
+  become_method: sudo
   apt:
     name: pciutils
     state: present
 - name: 'Install curl'
-  sudo: true
+  become: true
+  become_method: sudo
   apt:
     name: curl
     state: present
 - name: 'Install jshon'
-  sudo: true
+  become: true
+  become_method: sudo
   apt:
     name: jshon
     state: present
