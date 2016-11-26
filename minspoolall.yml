@@ -1,0 +1,6 @@
+---
+#Main Playbook. Call on each of the main playbooks
+- include: minspoolaws.yml
+- include: minspoolbastion.yml
+- include: minspoolmanagement.yml
+- include: awscleanup.yml
